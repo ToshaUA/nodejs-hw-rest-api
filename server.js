@@ -3,6 +3,9 @@ const app = require("./app");
 
 const DB_HOST =
   "mongodb+srv://ToshaUa:012194AtVtIt@cluster0.4r8axhl.mongodb.net/db-contacts?retryWrites=true&w=majority";
+
+mongoose.set("strictQuery", true);
+
 mongoose
   .connect(DB_HOST)
   .then(() =>
