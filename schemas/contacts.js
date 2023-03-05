@@ -9,6 +9,7 @@ const addSchema = Joi.object({
       tlds: { allow: ["com", "net", "ua"] },
     })
     .required(),
+  favorite: Joi.boolean().optional(),
 });
 
 const updateSchema = Joi.object({
@@ -20,9 +21,15 @@ const updateSchema = Joi.object({
       tlds: { allow: ["com", "net", "ua"] },
     })
     .optional(),
+  favorite: Joi.boolean().optional(),
+});
+
+const updateFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required(),
 });
 
 module.exports = {
   addSchema,
   updateSchema,
+  updateFavoriteSchema,
 };
