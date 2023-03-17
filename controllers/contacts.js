@@ -6,7 +6,7 @@ const listContacts = async (req, res) => {
   const { page = 1, limit = 20, favorite } = req.query;
   const skip = (page - 1) * limit;
   const filters = { owner };
-  if (favorite) filters.favorite = true;
+  if (favorite) filters.favorite = favorite;
   const result = await Contact.find(filters, "-createdAt -updatedAt", {
     skip,
     limit,
@@ -33,7 +33,7 @@ const addContact = async (req, res) => {
 const removeContact = async (req, res) => {
   const { _id: owner } = req.user;
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndDelete({ _id: contactId, owner });
+  const result = await Contact.findByIdAndRemove({ _id: contactId, owner });
   if (!result) {
     throw HttpError(404, "Not found");
   }
